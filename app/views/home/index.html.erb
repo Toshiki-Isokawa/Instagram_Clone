@@ -1,6 +1,7 @@
 <div>
     <% if user_signed_in? %>
         <p>こんにちは。 <%= current_user.name %></p>
+        <%= image_tag(current_user.avatar, :width =>'200', :height =>'auto') %>
         <%= link_to 'プロフィール変更', edit_user_registration_path %>
         <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
     <% else %>
