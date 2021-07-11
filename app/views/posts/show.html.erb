@@ -1,0 +1,15 @@
+<div>
+    <%= image_tag(@post.user, :width =>'100', :height =>'100') %>
+</div>
+<div>
+    <h3><%= link_to @post.user.name, user_path(@post.user) %> </h3><span class="text-muted">posted at <%= @post.created_at %></span>
+</div>
+<div>
+    <%= image_tag @post.image %>
+</div>
+<div>
+    <%= safe_join(@post.title.split("\n"), tag(:br)) %>
+</div>
+<div>
+    <%= safe_join(@post.content.split("\n"), tag(:br)) %>
+</div>

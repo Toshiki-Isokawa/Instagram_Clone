@@ -3,7 +3,9 @@
 <%= image_tag(current_user.avatar, :width =>'200', :height =>'auto') %>
 <%= link_to 'プロフィール変更', edit_user_registration_path %>
 <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-
+<div>
+    <%= link_to '投稿', new_post_path %>
+</div>
 <p>
     <%= link_to 'ホーム', root_url %>
 </p>

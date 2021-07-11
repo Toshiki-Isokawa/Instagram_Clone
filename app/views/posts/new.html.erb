@@ -1,0 +1,8 @@
+<div>
+    <%= form_with(model: @post, local: true) do |f| %>
+        <p><%= f.file_field :image %></p>
+        <p><%= f.text_area :title, rows: 1 %></p>
+        <p><%= f.text_area :content, class: 'form-control', rows: 5 %></p>
+        <p><%= f.submit '完了' %></p>
+    <% end %>
+</div>

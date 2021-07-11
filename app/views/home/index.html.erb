@@ -1,9 +1,9 @@
 <div>
     <% if user_signed_in? %>
-        <p>こんにちは。 <%= current_user.name %></p>
-        <%= image_tag(current_user.avatar, :width =>'200', :height =>'auto') %>
-        <%= link_to 'プロフィール変更', edit_user_registration_path %>
-        <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+        <%= render 'posts/posts', posts: @posts %>
+        <div>
+            <%= link_to '投稿', new_post_path %>
+        </div>
     <% else %>
         <%= link_to 'サインアップ', new_user_registration_path %>
         <%= link_to 'ログイン', new_user_session_path %>
