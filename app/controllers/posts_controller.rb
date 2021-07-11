@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
     before_action :authenticate_user!
+    before_action :correct_user, only: [:destroy]
     
     def show 
         @post = Post.find(params[:id])
@@ -18,13 +19,27 @@ class PostsController < ApplicationController
         else
             @posts = current_user.posts.order(id: :desc)
             flash.now[:danger] = 'メッセージの投稿に失敗しました。'
-            render 'home/index'
+            render 'new'
         end
+    end
+    
+    def destroy
+        @post = current_user.posts.find_by(id: params[:id])
+        @post.destroy
+        flash[:success] = '削除しました。'
+        redirect_to root_url
     end
     
     private
     
     def post_params
         params.require(:post).permit(:image, :title, :content)
+    end
+    
+    def correct_user
+        @post = current_user.posts.find_by(id: params[:id])
+        unless @post
+            redirect_to root_url
+        end
     end
 end
