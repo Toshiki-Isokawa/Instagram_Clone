@@ -12,4 +12,8 @@ class ApplicationController < ActionController::Base
     def after_sign_in_path_for(resource)
         user_path(resource.id)
     end
+    
+    def counts(user)
+        @count_posts = user.posts.count
+    end
 end

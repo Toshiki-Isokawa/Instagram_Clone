@@ -1,20 +1,25 @@
-<div>
-    <%= image_tag(@post.user, :width =>'100', :height =>'100') %>
-</div>
-<div>
-    <h3><%= link_to @post.user.name, user_path(@post.user) %> </h3><span class="text-muted">posted at <%= @post.created_at %></span>
-</div>
-<div>
-    <%= image_tag @post.image %>
-</div>
-<div>
-    <%= safe_join(@post.title.split("\n"), tag(:br)) %>
-</div>
-<div>
-    <%= safe_join(@post.content.split("\n"), tag(:br)) %>
-</div>
-<div>
-    <% if current_user == @post.user %>
-        <%= link_to "Delete", @post, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
-    <% end %>
+<div class="list-unstyled">
+    <li class="media mb-3">
+        <img class="mr-2 rounded" <%= image_tag(@post.user.avatar, :width =>'100', :height =>'100') %> 
+        <div class="media-body">
+            <div>
+                <h1><%= link_to @post.user.name, user_path(@post.user) %> </h3><span class="text-muted">posted at <%= @post.created_at %></span>
+            </div>
+            <div>
+                <h2 class="mb-0"><%= safe_join(@post.title.split("\n"), tag(:br)) %>
+            </div>
+            <div id = "class">
+                <%= image_tag @post.image, :width =>'1000', :height =>'auto'%>
+            </div>
+            <div>
+                <h3 class="mb-0"><%= safe_join(@post.content.split("\n"), tag(:br)) %>
+            </div>
+            <br>
+            <div>
+                <% if current_user == @post.user %>
+                    <%= link_to "Delete", @post, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
+                <% end %>
+            </div>
+        </div>
+    </li>
 </div>

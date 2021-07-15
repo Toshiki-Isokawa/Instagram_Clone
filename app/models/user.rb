@@ -6,6 +6,8 @@ class User < ApplicationRecord
          
   has_one_attached :avatar
   
+  validates :avatar, presence: true
+  
   def update_without_current_password(params, *options)
     params.delete(:current_password)
 

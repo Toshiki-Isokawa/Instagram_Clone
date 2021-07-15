@@ -1,15 +1,22 @@
-<% posts.each do |post| %>
-    <%= image_tag(post.user, :width =>'50', :height =>'50') %>
-    <div>
-        <%= link_to post.user.name, user_path(post.user) %> <span class="text-muted">posted at <%= post.created_at %></span>
-    </div>
-    <div>
-        <p><%= link_to post.title, post_path(post.id) %></p>
-    </div>
-    <div>
-         <p><%= image_tag(post.image) %></p>
-    </div>
-    <div>
-        <p><%= post.content %></p>
-    </div>
-<% end %>
+<ul class="list-unstyled">
+    <div class="center-block">
+      <% posts.each do |post| %>
+        <li class="media mb-3">
+          <img class="mr-2 rounded" <%= image_tag(post.user.avatar, { size: 50 }) %>
+          <div class="media-body">
+            <div>
+              <h1><%= link_to post.user.name, user_path(post.user) %></h1> <span class="text-muted">posted at <%= post.created_at %></span>
+            </div>
+            <div>
+              <h2 class="mb-0"><%= link_to (image_tag post.image, :width =>'400', :height =>'auto'), post_path(post.id) %></h2>
+            </div>
+            <div>
+                <h3 class="mb-0"><%= link_to post.title, post_path(post.id) %> </h3>
+            </div>
+          </div>
+        </li>
+      <% end %>
+     </div>
+  <%= paginate posts %>
+</ul>
+

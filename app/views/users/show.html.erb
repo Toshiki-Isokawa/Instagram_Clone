@@ -1,11 +1,27 @@
-<p>詳細ページ</p>
-<p>MyPage <%= @user.id %></p>
-<%= image_tag(current_user.avatar, :width =>'200', :height =>'auto') %>
-<%= link_to 'プロフィール変更', edit_user_registration_path %>
-<%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-<div>
-    <%= link_to '投稿', new_post_path %>
+<div class="row">
+  <aside class="col-sm-4">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title"><%= @user.name %></h3>
+      </div>
+      <div class="card-body">
+        <img class="rounded img-fluid" <%= image_tag(@user.avatar, { size: 500 }) %>
+      </div>
+    </div>
+  </aside>
+  <div class="col-sm-8">
+    <ul class="nav nav-tabs nav-justified mb-3">
+      <li class="nav-item"><a href="<%= user_path(@user) %>" class="nav-link <%= 'active' if current_page?(user_path(@user)) %>">Posts  <span class="badge badge-secondary"><%= @count_posts %></span></a></li>
+      <li class="nav-item"><a href="#" class="nav-link">Likes</a></li>
+    </ul>
+    <%= render 'posts/posts', posts: @posts %>
+  </div>
 </div>
+<div>
+  <a type="button", class="btn btn-primary", href='<%= edit_user_registration_path %>'>プロフィール編集</a>
+  <a type="button", class="btn btn-danger text-right" <%= link_to('ログアウト', destroy_user_session_path, {method: :delete}) %></a>
+</div>
+<br>
 <p>
     <%= link_to 'ホーム', root_url %>
 </p>

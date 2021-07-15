@@ -1,11 +1,20 @@
-<div>
-    <% if user_signed_in? %>
+<% if user_signed_in? %>
+    <div class="center-block">
         <%= render 'posts/posts', posts: @posts %>
-        <div>
-            <%= link_to '投稿', new_post_path %>
+    </div>
+    <div>
+        <%= link_to '投稿', new_post_path %>
+    </div>
+<% else %>
+    <div class="center jumbotron">
+        <div class="text-center">
+          <h1>Welcome to the Microposts <br> </h1>
+          <h5>*Postの閲覧、コメント、お気に入りはログインが必要です。</h5>
         </div>
-    <% else %>
-        <%= link_to 'サインアップ', new_user_registration_path %>
-        <%= link_to 'ログイン', new_user_session_path %>
-    <% end %>
-</div>
+    </div>
+    <div class="center-block">
+        <%= render 'posts/posts', posts: @posts %>
+    </div>
+    <%= link_to 'サインアップ', new_user_registration_path %>
+    <%= link_to 'ログイン', new_user_session_path %>
+<% end %>
