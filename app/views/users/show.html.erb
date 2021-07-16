@@ -5,7 +5,9 @@
         <h3 class="card-title"><%= @user.name %></h3>
       </div>
       <div class="card-body">
-        <img class="rounded img-fluid" <%= image_tag(@user.avatar, { size: 500 }) %>
+        <% if @user.avatar.attached? %>
+          <img class="rounded img-fluid" <%= image_tag(@user.avatar, { size: 500 }) %>
+        <% end %>
       </div>
     </div>
   </aside>
