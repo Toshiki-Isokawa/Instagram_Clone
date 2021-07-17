@@ -6,7 +6,7 @@ class PostsController < ApplicationController
         @post = Post.find(params[:id])
         @comment = current_user.comments.new
         @comments = @post.comments
-    
+        post_counts(@post)
     end
     
     def new 

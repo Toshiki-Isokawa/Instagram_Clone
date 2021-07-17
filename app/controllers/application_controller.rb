@@ -10,7 +10,11 @@ class ApplicationController < ActionController::Base
         user_path(resource.id)
     end
     
-    def counts(user)
+    def user_counts(user)
         @count_posts = user.posts.count
+    end
+    
+    def post_counts(post)
+        @count_comments = post.comments.count
     end
 end
