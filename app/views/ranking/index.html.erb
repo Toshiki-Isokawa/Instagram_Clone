@@ -1,0 +1,42 @@
+<div class='row'>
+    <aside class='col-sm-6'>
+        <h1>いいね数ランキング</h1>
+        <% @ranking_favorites.each.with_index(1) do |post, i| %>
+            <h2>第 <%= i %> 位</h2>
+            <li class="media mb-3">
+                <img class="mr-2 rounded" <%= image_tag(post.user.avatar, { size: 50 }) %>
+                <div class="media-body">
+                    <div>
+                      <h1><%= link_to post.user.name, user_path(post.user) %></h1> <span class="text-muted">posted at <%= post.created_at %></span>
+                    </div>
+                    <div>
+                      <h2 class="mr-2 rounded"><%= link_to (image_tag post.image, :width =>'400', :height =>'auto'), post_path(post.id) %></h2>
+                    </div>
+                    <div>
+                        <h3 class="mb-0"><%= link_to post.title, post_path(post.id) %> </h3>
+                    </div>
+                </div>
+            </li>
+        <% end %>
+    </aside>
+    <div class='col-sm-6'>
+        <h1>コメント数ランキング</h1>
+        <% @ranking_comments.each.with_index(1) do |post, i| %>
+            <h2>第 <%= i %> 位</h2>
+            <li class="media mb-3">
+                <img class="mr-2 rounded" <%= image_tag(post.user.avatar, { size: 50 }) %>
+                <div class="media-body">
+                    <div>
+                      <h1><%= link_to post.user.name, user_path(post.user) %></h1> <span class="text-muted">posted at <%= post.created_at %></span>
+                    </div>
+                    <div>
+                      <h2 class="mr-2 rounded"><%= link_to (image_tag post.image, :width =>'400', :height =>'auto'), post_path(post.id) %></h2>
+                    </div>
+                    <div>
+                        <h3 class="mb-0"><%= link_to post.title, post_path(post.id) %> </h3>
+                    </div>
+                </div>
+            </li>
+        <% end %>
+    </div>
+</div>
