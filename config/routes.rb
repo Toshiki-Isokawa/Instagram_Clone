@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   get 'about/index'
   get 'ranking/index'
   devise_for :users, 
-    controllers: { registrations: 'registrations' }
+    controllers: { registrations: 'registrations',
+                  omniauth_callbacks: "omniauth_callbacks" }
+    
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'home#index'
   resources :users, :only => [:show, :index] do 

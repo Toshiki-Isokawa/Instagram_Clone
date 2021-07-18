@@ -2,8 +2,32 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:twitter]
          
+  require 'open-uri'
+  
+  def self.from_omniauth(auth)
+    find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |user|
+      user.provider = auth["provider"]
+      user.uid = auth["uid"]
+      user.name = auth["info"]["nickname"]
+      user.email = auth["info"]["email"]
+      user.password = Devise.friendly_token[0,20]
+      avatar = open("#{auth.info.image}")
+      user.avatar.attach(io: avatar, filename: "user_avatar.jpg")
+    end
+  end
+  
+  def self.new_with_session(params, session)
+    if session["devise.user_attributes"]
+      new(session["devise.user_attributes"]) do |user|
+        user.attributes = params
+      end
+    else
+      super
+    end
+  end
+  
   has_one_attached :avatar
   
   validates :avatar, presence: true
@@ -39,4 +63,5 @@ class User < ApplicationRecord
   def like?(other_post)
     self.likes.include?(other_post)
   end
+  
 end
