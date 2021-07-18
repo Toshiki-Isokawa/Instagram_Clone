@@ -7,4 +7,11 @@ class Post < ApplicationRecord
   has_one_attached :image
   
   has_many :comments, dependent: :destroy
+  
+  has_many :favorites
+  has_many :likes, through: :favorites, source: :post
+  
+  def like?(other_post)
+    self.likes.include?(other_post)
+  end
 end

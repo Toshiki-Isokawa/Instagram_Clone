@@ -9,10 +9,15 @@
                 <h2 class="mb-0"><%= safe_join(@post.title.split("\n"), tag(:br)) %>
             </div>
             <div id = "class">
-                <%= image_tag @post.image, :width =>'1000', :height =>'auto'%>
+                <h2 class="mr-2 rounded"><%= image_tag @post.image, :width =>'1000', :height =>'auto'%></h2>
             </div>
             <div>
                 <h3 class="mb-0"><%= safe_join(@post.content.split("\n"), tag(:br)) %>
+            </div>
+            <br>
+            <div>
+                <%= render 'favorites/favorites_button', post: @post %>
+                この投稿には <%= @count_likes %> 人のユーザからいいねされています。
             </div>
             <br>
             <div>
@@ -23,17 +28,19 @@
         </div>
     </li>
 </div>
+<br>
 <div>
     <%= form_with(model: [@post, @comment], local: true) do |f| %>
         <%= hidden_field_tag :post_id, value: @post.id %>
         <div class="form-group">
             <div>
-                <%= f.text_area :comment_content, class: 'form-control',rows: 2 %>
+                <%= f.text_area :comment_content, :placeholder =>"ここにコメントを入力", class: 'form-control',rows: 2 %>
             </div>
             <%= f.submit 'コメント', class: 'btn btn-primary btn-block' %>
         </div>
     <% end %>
 </div>
+<br>
 <p>この投稿に<%= @count_comments %> 件のコメントがあります↓</p>
 <div>
     <% @comments.each do |comment| %>

@@ -8,18 +8,18 @@
       <%= render "devise/shared/error_messages", resource: resource %>
       
       <div class="form-group">
-        <%= f.label :avatar %> <br />
+        <%= f.label :プロフィール画像 %> <br />
         <%= f.file_field :avatar, autofocus: true, autocomplete: "avatar" %>
       </div>
       
       <div class="form-group">
-        <%= f.label :name %> <br />
-        <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control' %>
+        <%= f.label :ユーザネーム %> <br />
+        <%= f.text_field :name, :placeholder =>"ユーザネーム", autofocus: true, autocomplete: "name", class: 'form-control' %>
       </div>
     
       <div class="form-group">
         <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+        <%= f.email_field :email, :placeholder =>"Eメール", autofocus: true, autocomplete: "email", class: 'form-control' %>
       </div>
     
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -28,16 +28,16 @@
     
       <div class="form-group">
         <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-        <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
+        <%= f.password_field :password, :placeholder =>"パスワード", autocomplete: "new-password", class: 'form-control' %>
         <% if @minimum_password_length %>
           <br />
-          <em><%= @minimum_password_length %> characters minimum</em>
+          <em><%= @minimum_password_length %> 文字以上のパスワードを入力してください</em>
         <% end %>
       </div>
     
       <div class="form-group">
-        <%= f.label :password_confirmation %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
+        <%= f.label :確認用パスワード %><br />
+        <%= f.password_field :password_confirmation, :placeholder =>"確認用パスワード", autocomplete: "new-password", class: 'form-control' %>
       </div>
       
     
@@ -46,7 +46,7 @@
       </div>
     <% end %>
 
-<h3>Cancel my account</h3>
+<h3>アカウント削除</h3>
 
 <p>Unhappy? <%= button_to "アカウント削除", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 

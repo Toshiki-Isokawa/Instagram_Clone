@@ -9,31 +9,31 @@
       <%= render "devise/shared/error_messages", resource: resource %>
   
       <div class="form-group">
-        <%= f.label :avatar %> <br />
+        <%= f.label :プロフィール画像 %> <br />
         <%= f.file_field :avatar, autofocus: true, autocomplete: "avatar" %>
       </div>
   
       <div class="form-group">
         <%= f.label :name %> <br />
-        <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control' %>
+        <%= f.text_field :name, :placeholder =>"ユーザネーム", autofocus: true, autocomplete: "name", class: 'form-control' %>
       </div>
 
       <div class="form-group">
         <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+        <%= f.email_field :email, :placeholder =>"Eメール", autofocus: true, autocomplete: "email", class: 'form-control' %>
       </div>
 
       <div class="form-group">
-        <%= f.label :password %>
+        <%= f.label :パスワード %>
         <% if @minimum_password_length %>
-          <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <em>(<%= @minimum_password_length %> 文字以上のパスーワードを入力)</em>
         <% end %><br />
-        <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
+        <%= f.password_field :password, :placeholder =>"パスワード", autocomplete: "new-password", class: 'form-control' %>
       </div>
 
       <div class="form-group">
-        <%= f.label :password_confirmation %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
+        <%= f.label :確認用パスワード %><br />
+        <%= f.password_field :password_confirmation, :placeholder =>"もう一度パスワードを入力してください", autocomplete: "new-password", class: 'form-control' %>
       </div>
 
       <div class="btn btn-primary btn-block">
