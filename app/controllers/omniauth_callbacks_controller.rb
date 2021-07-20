@@ -4,10 +4,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
         callback_for(:twitter)
     end
     
-    def facebook
-        callback_for(:facebook)  
-    end
-    
     def google_oauth2
         @user = User.find_for_google_oauth2(request.env["omniauth.auth"].except("extra"))
     

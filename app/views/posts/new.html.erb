@@ -1,5 +1,6 @@
 <div>
     <%= form_with(model: @post, local: true) do |f| %>
+        <%= render 'layouts/error_messages', model: f.object %>
         <div class="form-group">
             <div>
                 <%= f.file_field :image %>
