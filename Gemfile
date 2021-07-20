@@ -72,6 +72,14 @@ group :production do
   gem 'pg', '>= 0.18', '< 2.0'
 end
 
+gem 'omniauth'
+
 gem 'omniauth-twitter'
+
+gem 'omniauth-google-oauth2'
+
+gem 'omniauth-facebook'
+
+gem 'dotenv-rails', require: 'dotenv/rails-now'
 
 gem "omniauth-rails_csrf_protection"

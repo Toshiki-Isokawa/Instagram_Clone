@@ -9,10 +9,9 @@ class FavoritesController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:post_id])
-    user = @post.user
-    current_user.unfavorite(user)
+    post = Post.find(params[:post_id])
+    current_user.unfavorite(post)
     flash[:success] = 'この投稿のいいねをやめました。'
-    redirect_to @post
+    redirect_to post
   end
 end

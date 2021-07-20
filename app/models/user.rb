@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:twitter]
+         :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:twitter, :google_oauth2]
          
   require 'open-uri'
   
@@ -15,6 +15,20 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]
       avatar = open("#{auth.info.image}")
       user.avatar.attach(io: avatar, filename: "user_avatar.jpg")
+      user.avatar = auth.info.image.gsub("picture","picture?type=large") if user.provider == "facebook"
+    end
+  end
+  
+  def self.find_for_google_oauth2(auth)
+    find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |user|
+      user.provider = auth["provider"]
+      user.uid = auth["uid"]
+      user.name = auth["info"]["name"]
+      user.email = auth["info"]["email"]
+      user.password = Devise.friendly_token[0,20]
+      avatar = open("#{auth.info.image}")
+      user.avatar.attach(io: avatar, filename: "user_avatar.jpg")
+      user.avatar = auth.info.image.gsub("picture","picture?type=large") if user.provider == "facebook"
     end
   end
   

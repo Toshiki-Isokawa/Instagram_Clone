@@ -272,6 +272,9 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   config.omniauth :twitter, "Ofo5uChVPBbb251O7JBufE5LV", "bTjRVfbNJaryjQ1WeLDEzbWcFAB4LPiw8hXwR0Pmpm0t0PkT5w", scope: 'email', oauth_callback: "https://localhost:3000/users/auth/twitter/callback"
+  #config.omniauth :facebook, ENV['FACEBOOK_CLIENT_ID'], ENV['FACEBOOK_CLIENT_SECRET'] #scope: 'email', info_fields: 'email', oauth_callback: "https://localhost:3000/users/auth/facebook/callback"
+  config.omniauth :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET'], skip_jwt: true
+  OmniAuth.config.logger = Rails.logger if Rails.env.development?
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
